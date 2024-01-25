@@ -1,7 +1,7 @@
 {
     "layer": "top",
     "height": 35,
-    "spacing": 5,
+    "spacing": 8,
     // Choose the order of the modules
     "modules-left": [
         "hyprland/workspaces"
@@ -32,13 +32,14 @@
     },
 //    "clock": {
 //        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-//        "format": " {:%H:%M   %a, %b %d}"
+//        "format": " {:%H:%M   %a, %b %d}"
 //    },
     "clock": {
         "timezone": "Asia/Kolkata",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": " {:%d/%m/%Y}",
-        "format": " {:%H:%M}"
+        "tooltip-format": "<tt>{calendar}</tt>",
+        "format-alt": "\uf073 {:%d/%m/%Y}",
+        "format": "{: %H:%M}"
+        //"format": " {:%H:%M}"
     },
     "battery": {
         "states": {
@@ -67,9 +68,9 @@
     "network": {
         "tooltip": false,
         "format-wifi": "󰖩  {essid}",
-        "format-disconnected": "睊",
-        "format-ethernet": "",
-        "on-click": "rofi-wifi-menu"
+        "format-disconnected": "\udb82\udd2d",
+        "format-ethernet": "\udb80\ude00",
+        "on-click": "rofi-wifi-menu.sh"
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float

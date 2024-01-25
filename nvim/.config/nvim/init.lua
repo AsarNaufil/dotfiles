@@ -1,43 +1,3 @@
---[[
-
-=====================================================================
-==================== READ THIS BEFORE CONTINUING ====================
-=====================================================================
-
-Kickstart.nvim is *not* a distribution.
-
-Kickstart.nvim is a template for your own configuration.
-  The goal is that you can read every line of code, top-to-bottom, understand
-  what your configuration is doing, and modify it to suit your needs.
-
-  Once you've done that, you should start exploring, configuring and tinkering to
-  explore Neovim!
-
-  If you don't know anything about Lua, I recommend taking some time to read through
-  a guide. One possible example:
-  - https://learnxinyminutes.com/docs/lua/
-
-
-  And then you can explore or search through `:help lua-guide`
-  - https://neovim.io/doc/user/lua-guide.html
-
-
-Kickstart Guide:
-
-I have left several `:help X` comments throughout the init.lua
-You should run that command and read that help section for more information.
-
-In addition, I have some `NOTE:` items throughout the file.
-These are for you, the reader to help understand what is happening. Feel free to delete
-them once you know what you're doing, but they should serve as a guide for when you
-are first encountering a few different constructs in your nvim config.
-
-I hope you enjoy your Neovim journey,
-- TJ
-
-P.S. You can delete this when you're done too. It's your config now :)
---]]
-
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
@@ -67,37 +27,24 @@ vim.opt.rtp:prepend(lazypath)
 --  You can also configure plugins after the setup call,
 --    as they will be available in your neovim runtime.
 require('lazy').setup({
-  -- NOTE: First, some plugins that don't require any configuration
   'ThePrimeagen/harpoon',
-
   -- Git related plugins
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
-
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
-
-  -- NOTE: This is where your plugins related to LSP can be installed.
-  --  The configuration is done below. Search for lspconfig to find it below.
   {
     -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
     dependencies = {
-      -- Automatically install LSPs to stdpath for neovim
       { 'williamboman/mason.nvim', config = true },
       'williamboman/mason-lspconfig.nvim',
-
-      -- Useful status updates for LSP
-      -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
       { 'j-hui/fidget.nvim',       opts = {} },
-
-      -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
     },
   },
 
   'xiyaowong/transparent.nvim',
-
   {
     "hrsh7th/nvim-cmp",
     opts = {
@@ -124,23 +71,6 @@ require('lazy').setup({
       'rafamadriz/friendly-snippets',
     }
   },
-
-  -- {
-  --   -- Autocompletion
-  --   'hrsh7th/nvim-cmp',
-  --   dependencies = {
-  --     -- Snippet Engine & its associated nvim-cmp source
-  --     'L3MON4D3/LuaSnip',
-  --     'saadparwaiz1/cmp_luasnip',
-  --
-  --     -- Adds LSP completion capabilities
-  --     'hrsh7th/cmp-nvim-lsp',
-  --     'hrsh7th/cmp-path',
-  --
-  --     -- Adds a number of user-friendly snippets
-  --     'rafamadriz/friendly-snippets',
-  --   },
-  -- },
 
   -- TODO
   -- 'fedepujol/move.nvim',
@@ -236,16 +166,6 @@ require('lazy').setup({
     },
   },
 
-  -- keeping in case I want to switch back.
-  -- {
-  --   -- Theme inspired by Atom
-  --   'navarasu/onedark.nvim',
-  --   priority = 1000,
-  --   config = function()
-  --     vim.cmd.colorscheme 'onedark'
-  --   end,
-  -- },
-
   -- {
   -- TODO : remap me
   -- "christoomey/vim-tmux-navigator",
@@ -270,11 +190,7 @@ require('lazy').setup({
   {
     "folke/trouble.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    opts = {
-      -- your configuration comes here
-      -- or leave it empty to use the default settings
-      -- refer to the configuration section below
-    },
+    opts = {},
   },
 
   {
@@ -352,7 +268,6 @@ require('lazy').setup({
   --   end,
   -- },
 
-  -- { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
   {
     "catppuccin/nvim",
     name = "catppuccin",
@@ -376,12 +291,12 @@ require('lazy').setup({
             warnings = { "italic" },
             information = { "italic" },
           },
-          underlines = {
-            errors = { "underline" },
-            hints = { "underline" },
-            warnings = { "underline" },
-            information = { "underline" },
-          },
+          -- underlines = {
+          --   errors = { "underline" },
+          --   hints = { "underline" },
+          --   warnings = { "underline" },
+          --   information = { "underline" },
+          -- },
           inlay_hints = {
             background = true,
           },
@@ -393,26 +308,7 @@ require('lazy').setup({
       },
       term_colors = true,
       transparent_background = true,
-      styles = {
-        comments = {},
-        conditionals = {},
-        loops = {},
-        functions = {},
-        keywords = {},
-        strings = {},
-        variables = {},
-        numbers = {},
-        booleans = {},
-        properties = {},
-        types = {},
-      },
-      color_overrides = {
-        mocha = {
-          base = "#000000",
-          mantle = "#000000",
-          crust = "#000000",
-        },
-      },
+      priority = 1000,
     },
   },
 
@@ -558,13 +454,13 @@ vim.api.nvim_create_user_command('LiveGrepGitRoot', live_grep_git_root, {})
 -- See `:help telescope.builtin`
 vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
 vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
-vim.keymap.set('n', '<leader>/', function()
-  -- You can pass additional configuration to telescope to change theme, layout, etc.
-  require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-    winblend = 10,
-    previewer = false,
-  })
-end, { desc = '[/] Fuzzily search in current buffer' })
+-- vim.keymap.set('n', '<leader>/', function()
+--   -- You can pass additional configuration to telescope to change theme, layout, etc.
+--   require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+--     winblend = 10,
+--     previewer = false,
+--   })
+-- end, { desc = '[/] Fuzzily search in current buffer' })
 
 local function telescope_live_grep_open_files()
   require('telescope.builtin').live_grep {
@@ -793,7 +689,7 @@ cmp.setup {
     ['<C-p>'] = cmp.mapping.select_prev_item(),
     ['<C-b>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete {},
+    ['<a-Space>'] = cmp.mapping.complete {},
     ['<CR>'] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
@@ -949,9 +845,9 @@ vim.cmd('set foldtext=LuaFoldText()')
 
 -- Set the shell to PowerShell
 
-vim.opt.shell = 'powershell.exe'
-vim.opt.shellcmdflag = '-nologo -noprofile -ExecutionPolicy RemoteSigned -command'
-vim.opt.shellxquote = ''
+-- vim.opt.shell = 'powershell.exe'
+-- vim.opt.shellcmdflag = '-nologo -noprofile -ExecutionPolicy RemoteSigned -command'
+-- vim.opt.shellxquote = ''
 
 -- I love this.
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
@@ -1328,69 +1224,69 @@ require('lazy').setup({
   -- },
 
   -- { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
-  {
-    "catppuccin/nvim",
-    name = "catppuccin",
-    opts = {
-      integrations = {
-        cmp = true,
-        gitsigns = true,
-        nvimtree = true,
-        treesitter = true,
-        harpoon = true,
-        mason = true,
-        noice = true,
-        notify = true,
-        which_key = true,
-        fidget = true,
-        native_lsp = {
-          enabled = true,
-          virtual_text = {
-            errors = { "italic" },
-            hints = { "italic" },
-            warnings = { "italic" },
-            information = { "italic" },
-          },
-          underlines = {
-            errors = { "underline" },
-            hints = { "underline" },
-            warnings = { "underline" },
-            information = { "underline" },
-          },
-          inlay_hints = {
-            background = true,
-          },
-        },
-        mini = {
-          enabled = true,
-          indentscope_color = "",
-        },
-      },
-      term_colors = true,
-      transparent_background = false,
-      styles = {
-        comments = {},
-        conditionals = {},
-        loops = {},
-        functions = {},
-        keywords = {},
-        strings = {},
-        variables = {},
-        numbers = {},
-        booleans = {},
-        properties = {},
-        types = {},
-      },
-      color_overrides = {
-        mocha = {
-          base = "#000000",
-          mantle = "#000000",
-          crust = "#000000",
-        },
-      },
-    },
-  },
-
+  -- {
+  --   "catppuccin/nvim",
+  --   name = "catppuccin",
+  --   opts = {
+  --     integrations = {
+  --       cmp = true,
+  --       gitsigns = true,
+  --       nvimtree = true,
+  --       treesitter = true,
+  --       harpoon = true,
+  --       mason = true,
+  --       noice = true,
+  --       notify = true,
+  --       which_key = true,
+  --       fidget = true,
+  --       native_lsp = {
+  --         enabled = true,
+  --         virtual_text = {
+  --           errors = { "italic" },
+  --           hints = { "italic" },
+  --           warnings = { "italic" },
+  --           information = { "italic" },
+  --         },
+  --         underlines = {
+  --           errors = { "underline" },
+  --           hints = { "underline" },
+  --           warnings = { "underline" },
+  --           information = { "underline" },
+  --         },
+  --         inlay_hints = {
+  --           background = true,
+  --         },
+  --       },
+  --       mini = {
+  --         enabled = true,
+  --         indentscope_color = "",
+  --       },
+  --     },
+  --     term_colors = true,
+  --     transparent_background = false,
+  --     styles = {
+  --       comments = {},
+  --       conditionals = {},
+  --       loops = {},
+  --       functions = {},
+  --       keywords = {},
+  --       strings = {},
+  --       variables = {},
+  --       numbers = {},
+  --       booleans = {},
+  --       properties = {},
+  --       types = {},
+  --     },
+  --     color_overrides = {
+  --       mocha = {
+  --         base = "#000000",
+  --         mantle = "#000000",
+  --         crust = "#000000",
+  --       },
+  --     },
+  --   },
+  -- },
+  --
   { 'm4xshen/autoclose.nvim', opts = {} },
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
@@ -1924,9 +1820,9 @@ vim.cmd('set foldtext=LuaFoldText()')
 
 -- Set the shell to PowerShell
 
-vim.opt.shell = 'powershell.exe'
-vim.opt.shellcmdflag = '-nologo -noprofile -ExecutionPolicy RemoteSigned -command'
-vim.opt.shellxquote = ''
+-- vim.opt.shell = 'powershell.exe'
+-- vim.opt.shellcmdflag = '-nologo -noprofile -ExecutionPolicy RemoteSigned -command'
+-- vim.opt.shellxquote = ''
 
 -- I love this.
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
@@ -1937,7 +1833,6 @@ vim.keymap.set("n", "n", "nzzzv")
 -- Copy line to system clipboard
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 -- vim.keymap.set("n", "<leader>Y", [["+Y]])
-vim.cmd.colorscheme 'catppuccin-frappe'
 
 -- disable netrw
 -- vim.g.loaded_netrw = 1
@@ -1949,3 +1844,23 @@ vim.cmd.colorscheme 'catppuccin-frappe'
 --   fold = '·',
 --   diff = '-'
 -- })
+
+local colors = require("catppuccin.palettes").get_palette()
+local TelescopeColor = {
+	TelescopeMatching = { fg = colors.flamingo },
+	TelescopeSelection = { fg = colors.text, bg = colors.surface0, bold = true },
+	TelescopePromptPrefix = { bg = colors.surface0 },
+	TelescopePromptNormal = { bg = colors.surface0 },
+	TelescopeResultsNormal = { bg = colors.mantle },
+	TelescopePreviewNormal = { bg = colors.mantle },
+	TelescopePromptBorder = { bg = colors.surface0, fg = colors.surface0 },
+	TelescopeResultsBorder = { bg = colors.mantle, fg = colors.mantle },
+	TelescopePreviewBorder = { bg = colors.mantle, fg = colors.mantle },
+	TelescopePromptTitle = { bg = colors.pink, fg = colors.mantle },
+	TelescopeResultsTitle = { fg = colors.mantle },
+	TelescopePreviewTitle = { bg = colors.green, fg = colors.mantle },
+}
+
+-- for hl, col in pairs(TelescopeColor) do
+-- 	vim.api.nvim_set_hl(0, hl, col)
+-- end
