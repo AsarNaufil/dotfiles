@@ -90,7 +90,7 @@ button {
     background-color: @base;
     color: @crust;
     border-radius: 7px;
-    margin: 5px 0;
+    margin: 5px 2px;
 }
 
 #window,
