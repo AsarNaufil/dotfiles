@@ -1,7 +1,7 @@
 {
     "layer": "top",
     "height": 35,
-    "spacing": 8,
+    "spacing": 0,
     // Choose the order of the modules
     "modules-left": [
         "hyprland/workspaces"
@@ -23,7 +23,7 @@
     },
     "tray": {
         // "icon-size": 21,
-        "spacing": 10
+        "spacing": 7
     },
     "custom/updates": {
         "exec": "~/.local/bin/polybar/updates-pacman-aurhelper",
