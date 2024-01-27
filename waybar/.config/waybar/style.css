@@ -9,7 +9,7 @@ window#waybar {
     background-color: alpha(@crust,0.2);
     color: @text;
     transition-property: background-color;
-    transition-duration: .5s;
+    transition-duration: .2s;
 }
 
 window#waybar.hidden {
@@ -52,16 +52,17 @@ button {
 #workspaces button {
     padding: 0 8px;
     color: @text;
-    border-radius: 7px;
+    border-radius: 4px;
     margin: 5px 0 5px 5px;
 }
 
 #workspaces button.selected {
-    background-color: @text;
+    background-color: @text; 
 }
 
 #workspaces button.active {
-    background-color: @surface0;
+    /* background-color: @surface0; */
+    border: 1px solid @text;
 }
 
 #workspaces button.urgent {
@@ -86,16 +87,17 @@ button {
 #idle_inhibitor,
 #scratchpad,
 #mpd {
-    padding: 0 12px;
-    background-color: @base;
-    color: @crust;
-    border-radius: 7px;
-    margin: 5px 8px;
+    padding: 0 10px;
+    /* background-color: @base; */
+    background-color: transparent;
+    color: @text;
+    border-radius: 4px;
+    margin: 4px 0px;
 }
 
 #window,
 #workspaces {
-    margin: 0 4px;
+    margin: 0;
 }
 
 /* If workspaces is the leftmost module, omit left margin */
@@ -107,7 +109,7 @@ button {
 .modules-right > widget:last-child > #workspaces {
     margin-right: 0;
 }
-
+/*
 label:focus {
     background-color: #000000;
 }
@@ -115,7 +117,6 @@ label:focus {
 #clock {
   color: @text;
   font-size: 14px;
-  font-family: JetBrains Mono;
 }
 
 #custom-updates {
@@ -170,7 +171,7 @@ label:focus {
 #scratchpad.empty {
 	background-color: transparent;
 }
-
+*/
 tooltip {
 border-radius: 8px;
 padding: 15px;

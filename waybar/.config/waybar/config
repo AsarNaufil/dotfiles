@@ -1,21 +1,26 @@
 {
     "layer": "top",
-    "height": 35,
+    "height": 30,
     "spacing": 0,
     // Choose the order of the modules
     "modules-left": [
         "hyprland/workspaces"
     ],
     "modules-center": [
-        "clock"
+        "hyprland/window"
     ],
     "modules-right": [
         // TODO: "custom/updates",
+        "battery",
         "pulseaudio",
         "network",
-        "battery",
-        "custom/power"
+        "clock"
     ],
+    "hyprland/window": {
+        "max-length": 50,
+        "separate-outputs": true,
+        "format": "{}"
+    },
     "hyprland/workspaces": {
         "disable-scroll": true,
         "all-outputs": true,
@@ -34,21 +39,22 @@
 //        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
 //        "format": " {:%H:%M   %a, %b %d}"
 //    },
-    "clock": {
-        "timezone": "Asia/Kolkata",
-        "tooltip-format": "<tt>{calendar}</tt>",
-        "format-alt": "\uf073 {:%d/%m/%Y}",
-        "format": "{: %H:%M}"
+"clock": {
+    "timezone": "Asia/Kolkata",
+    "tooltip-format": "<tt>{calendar}</tt>",
+    // "format-alt": "\uf073 {%A, %B %d, %Y (%R)}",
+    // "format": "{:%d/%m/%Y %H:%M }"
+    "format": "{:%a, %b %d %R %p}"
         //"format": " {:%H:%M}"
-    },
-    "battery": {
-        "states": {
+},
+"battery": {
+    "states": {
             // "good": 95,
             "warning": 30
-        },
-        "format": "{icon} {capacity}%",
-        "format-charging": " {capacity}%",
-        "format-plugged": "󰂄 {capacity}%",
+    },
+    "format": "{icon} {capacity}%",
+    "format-charging": " {capacity}%",
+    "format-plugged": "󰂄 {capacity}%",
         // "format-good": "", // An empty format will hide the module
         // "format-full": "",
         "format-icons": [
@@ -59,40 +65,40 @@
             "",
             ""
         ]
-    },
-    "disk": {
-        "interval": 300,
-        "format": "󰋊 {free}",
-        "path": "/"
-    },
-    "network": {
-        "tooltip": false,
-        "format-wifi": "󰖩  {essid}",
-        "format-disconnected": "\udb82\udd2d",
-        "format-ethernet": "\udb80\ude00",
-        "on-click": "rofi-wifi-menu.sh"
-    },
-    "pulseaudio": {
+},
+"disk": {
+    "interval": 300,
+    "format": "󰋊 {free}",
+    "path": "/"
+},
+"network": {
+    "tooltip": false,
+    "format-wifi": "󰖩  {essid}",
+    "format-disconnected": "\udb82\udd2d",
+    "format-ethernet": "\udb80\ude00",
+    "on-click": "rofi-wifi-menu.sh"
+},
+"pulseaudio": {
         // "scroll-step": 1, // %, can be a float
         "format": "󰕾 {volume}%",
         "format-muted": "󰖁 {volume}%",
         "on-click": "pavucontrol"
+},
+"custom/power": {
+    "format": "󰤆",
+    "on-click": "wlogout"
+},
+"custom/media": {
+    "format": "{icon} {}",
+    "return-type": "json",
+    "max-length": 40,
+    "format-icons": {
+        "spotify": "",
+        "default": "🎜"
     },
-    "custom/power": {
-        "format": "󰤆",
-        "on-click": "wlogout"
-    },
-    "custom/media": {
-        "format": "{icon} {}",
-        "return-type": "json",
-        "max-length": 40,
-        "format-icons": {
-            "spotify": "",
-            "default": "🎜"
-        },
-        "escape": true,
-        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
+    "escape": true,
+    "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
         // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
-    }
+}
 }
 // vim: ft=jsonc
