@@ -14,10 +14,10 @@
         "battery",
         "pulseaudio",
         "network",
-        "clock"
+        "clock",
     ],
     "hyprland/window": {
-        "max-length": 50,
+        "max-length": 70,
         "separate-outputs": true,
         "format": "{}"
     },
@@ -28,77 +28,105 @@
     },
     "tray": {
         // "icon-size": 21,
-        "spacing": 7
+        "spacing": 12
     },
     "custom/updates": {
         "exec": "~/.local/bin/polybar/updates-pacman-aurhelper",
         "format": "󰏔 {}",
         "interval": 600
     },
-//    "clock": {
-//        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-//        "format": " {:%H:%M   %a, %b %d}"
-//    },
-"clock": {
-    "timezone": "Asia/Kolkata",
-    "tooltip-format": "<tt>{calendar}</tt>",
+    "clock": {
+        "timezone": "Asia/Kolkata",
+        "tooltip-format": "<tt>{calendar}</tt>",
     // "format-alt": "\uf073 {%A, %B %d, %Y (%R)}",
     // "format": "{:%d/%m/%Y %H:%M }"
     "format": "{:%a, %b %d %R %p}"
         //"format": " {:%H:%M}"
-},
-"battery": {
-    "states": {
+    },
+    // Eric.
+    // "battery": {
+    //     "states": {
             // "good": 95,
-            "warning": 30
-    },
-    "format": "{icon} {capacity}%",
-    "format-charging": " {capacity}%",
-    "format-plugged": "󰂄 {capacity}%",
-        // "format-good": "", // An empty format will hide the module
-        // "format-full": "",
+    //         "warning": 30
+    //     },
+    //     "format": "{icon} {capacity}%",
+    //     "format-charging": " {capacity}%",
+    //     "format-plugged": "󰂄 {capacity}%",
+    //     "format-icons": [
+    //         "",
+    //         "",
+    //         "",
+    //         "",
+    //         "",
+    //         ""
+    //     ]
+    // },
+    "battery": {
+        "exec"  : "batter_warning",
+        "states": {
+            "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": "󰂄 {capacity}%",
+        "format-plugged": " {capacity}%",
+        "format-alt": "{time} {icon}",
+        "format-full": "󱈑 {capacity}%",
         "format-icons": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
+            "󱊡",
+            "󱊢",
+            "󱊣"
         ]
-},
-"disk": {
-    "interval": 300,
-    "format": "󰋊 {free}",
-    "path": "/"
-},
-"network": {
-    "tooltip": false,
-    "format-wifi": "󰖩  {essid}",
-    "format-disconnected": "\udb82\udd2d",
-    "format-ethernet": "\udb80\ude00",
-    "on-click": "rofi-wifi-menu.sh"
-},
-"pulseaudio": {
-        // "scroll-step": 1, // %, can be a float
-        "format": "󰕾 {volume}%",
-        "format-muted": "󰖁 {volume}%",
-        "on-click": "pavucontrol"
-},
-"custom/power": {
-    "format": "󰤆",
-    "on-click": "wlogout"
-},
-"custom/media": {
-    "format": "{icon} {}",
-    "return-type": "json",
-    "max-length": 40,
-    "format-icons": {
-        "spotify": "",
-        "default": "🎜"
     },
-    "escape": true,
-    "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
+    "disk": {
+        "interval": 300,
+        "format": "󰋊 {free}",
+        "path": "/"
+    },
+    "network": {
+        "tooltip": false,
+        "format-wifi": "󰖩",
+        "format-disconnected": "\udb82\udd2d",
+        "format-ethernet": "\udb80\ude00",
+        "on-click": "rofi-wifi-menu.sh"
+    },
+    // "pulseaudio": {
+    //     // "scroll-step": 1, // %, can be a float
+    //     "format": "󰕾 {volume}%",
+    //     "format-muted": "󰖁 {volume}%",
+    //     "on-click": "pavucontrol"
+    // },
+    "pulseaudio": {
+    "on-click": "pactl set-sink-mute 0 toggle",
+    "on-scroll-down": "pactl set-sink-volume 0 +5%",
+    "on-scroll-up": "pactl set-sink-volume 0 -5%",
+    "scroll-step": 1,
+    "format": "{icon}  {volume}%",
+    "format-muted": "󰖁 ",
+    "format-icons": {
+      "default": [
+        "",
+        "",
+        ""
+      ]
+    }
+  },
+    "custom/power": {
+        "format": "󰤆",
+        "on-click": "wlogout"
+    },
+    "custom/media": {
+        "format": "{icon} {}",
+        "return-type": "json",
+        "max-length": 40,
+        "format-icons": {
+            "spotify": "",
+            "default": "🎜"
+        },
+        "escape": true,
+        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
         // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
-}
+    }
 }
 // vim: ft=jsonc
