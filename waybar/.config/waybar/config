@@ -1,6 +1,6 @@
 {
     "layer": "top",
-    "height": 30,
+    "height": 36,
     "spacing": 0,
     // Choose the order of the modules
     "modules-left": [
@@ -12,12 +12,12 @@
     "modules-right": [
         // TODO: "custom/updates",
         "battery",
-        "pulseaudio",
+        // "pulseaudio",
         "network",
         "clock",
     ],
     "hyprland/window": {
-        "max-length": 70,
+        "max-length": 100,
         "separate-outputs": true,
         "format": "{}"
     },
@@ -102,7 +102,7 @@
     "on-scroll-down": "pactl set-sink-volume 0 +5%",
     "on-scroll-up": "pactl set-sink-volume 0 -5%",
     "scroll-step": 1,
-    "format": "{icon}  {volume}%",
+    "format": "{icon}",
     "format-muted": "󰖁 ",
     "format-icons": {
       "default": [

@@ -184,6 +184,19 @@ padding: 5px;
 background-color: @base;
 color: @text;
 }
+#battery {
+    color: @blue;
+}
 
+#battery.warning:not(.charging) {
+    color: @yellow;
+}
+
+#battery.good:not(.charging) {
+    color: @green;
+}
+#battery.critial:not(.charging) {
+    color: @red;
+}
 /* vim: ft=sass
 */
