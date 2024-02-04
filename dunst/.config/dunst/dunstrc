@@ -161,7 +161,7 @@
     #   %n  progress value if set without any extra characters
     #   %%  Literal %
     # Markup is allowed
-    format = "<b><span font="Maple Mono NF 12">%a</span></b>\n%sn%b"
+    format = "<b><span font="Maple Mono NF 12">%a</span></b>\n%s%b"
 
     # Alignment of message text.
     # Possible values are "left", "center" and "right".
@@ -254,7 +254,8 @@
 
     # Uncomment this if you want to let notications appear under fullscreen
     # applications (default: overlay)
-    layer = top
+    # layer = top
+    layer = overlay
 
     # Set this to true to use X11 output on Wayland.
     force_xwayland = false
