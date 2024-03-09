@@ -5,13 +5,11 @@ return {
         integrations = {
             cmp = true,
             gitsigns = true,
-            nvimtree = true,
             treesitter = true,
             harpoon = true,
             telescope = true,
             mason = true,
             noice = true,
-            nvimtree = true,
             notify = true,
             which_key = true,
             fidget = true,
